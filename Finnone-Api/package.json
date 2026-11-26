@@ -1,0 +1,12 @@
+{
+  "name": "finnone-api",
+  "version": "1.0.0",
+  "description": "FinnOne Banking Mock API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

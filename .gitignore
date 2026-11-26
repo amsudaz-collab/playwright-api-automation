@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Environment credentials
+.env
+.env.*
+
+# Playwright generated reports
+playwright-report/
+test-results/
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/

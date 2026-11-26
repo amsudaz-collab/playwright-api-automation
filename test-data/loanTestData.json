@@ -1,0 +1,34 @@
+[
+  {
+    "TC_ID": "TC01",
+    "CustomerName": "Amsu",
+    "LoanAmount": 200000,
+    "LoanTenure": 36,
+    "MonthlyIncome": 50000,
+    "ExpectedStatus": 201
+  },
+  {
+    "TC_ID": "TC02",
+    "CustomerName": "Ravi",
+    "LoanAmount": 2000,
+    "LoanTenure": 36,
+    "MonthlyIncome": 50000,
+    "ExpectedStatus": 400
+  },
+  {
+    "TC_ID": "TC03",
+    "CustomerName": "Priya",
+    "LoanAmount": 50000,
+    "LoanTenure": 12,
+    "MonthlyIncome": 30000,
+    "ExpectedStatus": 201
+  },
+  {
+    "TC_ID": "TC04",
+    "CustomerName": "Kumar",
+    "LoanAmount": 1000000,
+    "LoanTenure": 60,
+    "MonthlyIncome": 80000,
+    "ExpectedStatus": 201
+  }
+]

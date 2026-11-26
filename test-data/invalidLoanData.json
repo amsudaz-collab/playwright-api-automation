@@ -1,0 +1,27 @@
+
+[
+  {
+    "testCase": "Loan amount below minimum",
+    "testData": {
+      "customerName": "Test Customer",
+      "loanAmount": 2000,
+      "loanTenure": 36,
+      "employmentType": "Salaried",
+      "monthlyIncome": 50000,
+      "loanPurpose": "Personal"
+    },
+    "expectedStatus": 400
+  },
+  {
+    "testCase": "Missing customer name",
+    "testData": {
+      "customerName": "",
+      "loanAmount": 200000,
+      "loanTenure": 36,
+      "employmentType": "Salaried",
+      "monthlyIncome": 50000,
+      "loanPurpose": "Personal"
+    },
+    "expectedStatus": 400
+  }
+]

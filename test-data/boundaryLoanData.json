@@ -1,0 +1,15 @@
+
+[
+  {
+    "testCase": "Minimum loan amount",
+    "testData": {
+      "customerName": "Test Customer",
+      "loanAmount": 50000,
+      "loanTenure": 36,
+      "employmentType": "Salaried",
+      "monthlyIncome": 50000,
+      "loanPurpose": "Personal"
+    },
+    "expectedStatus": 201
+  }
+]
