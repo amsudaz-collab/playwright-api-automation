@@ -56,6 +56,20 @@ async function updateLoanStatus(request, loanId, status) {
         )
     );
 }
+async function closeLoan(request, loanId, closureData) {
+
+    return await requestWithAuth(request, token =>
+        request.post(
+            `${apiConfig.baseURL}/api/loans/${loanId}/close`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                data: closureData
+            }
+        )
+    );
+}
 
 async function deleteLoan(request, loanId) {
     return await requestWithAuth(request, (token) =>
@@ -69,11 +83,27 @@ async function deleteLoan(request, loanId) {
         )
     );
 }
+async function approveLoan(request, loanId, approvalData) {
+    return await requestWithAuth(request, (token) =>
+        request.post(
+            `${apiConfig.baseURL}/api/loans/${loanId}/approvals`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                data: approvalData
+            }
+        )
+    );
+}
 
 module.exports = {
     createLoan,
     getLoan,
     updateLoan,
     updateLoanStatus,
-    deleteLoan
+    deleteLoan,
+    closeLoan,
+    approveLoan
+
 };

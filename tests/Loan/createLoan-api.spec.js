@@ -4,16 +4,20 @@ const { test, expect } = require('@playwright/test');
 const loanData = require('../../test-data/loanTestData.json');
 const { createLoan } = require('../../utils/apiHelper');
 
-test.describe('Dynamic Loan API Tests - Excel Data', () => {
+const {
+    getLoanById,
+    closeDB
+} = require('../../utils/DBUtils');
 
-    // Dynamically register one test for every Excel record
+test.describe('Dynamic Loan API Tests - Excel Data + SQL', () => {
+
     for (const data of loanData) {
 
         test(`${data.TC_ID} - ${data.CustomerName}`, async ({ request }) => {
 
             console.log(`\nStarting Test Case: ${data.TC_ID}`);
 
-            // Prepare loan request payload
+            // 1. Prepare loan payload
             const loanDetails = {
                 customerName: data.CustomerName,
                 loanAmount: data.LoanAmount,
@@ -23,53 +27,73 @@ test.describe('Dynamic Loan API Tests - Excel Data', () => {
 
             console.log('Request Payload:', loanDetails);
 
-            // Execute API request using centralized helper
+            // 2. Create loan using API
             const response = await createLoan(request, loanDetails);
 
             const actualStatus = response.status();
 
-            console.log(`${data.TC_ID} Response Status:`, actualStatus);
+            console.log('API Response Status:', actualStatus);
 
-            // Validate HTTP status code
             expect(actualStatus).toBe(data.ExpectedStatus);
 
-            // Validate response body for successful loan creation
+            // 3. Validate successful loan creation
             if (data.ExpectedStatus === 201) {
 
                 const responseBody = await response.json();
-
-                console.log(
-                    'Full API Response:',
-                    JSON.stringify(responseBody, null, 2)
-                );
-
-                // Access nested data object
                 const loan = responseBody.data;
 
-                // Validate loan details
+                console.log('API Response:', responseBody);
+
                 expect(loan.customerName).toBe(data.CustomerName);
                 expect(loan.loanAmount).toBe(data.LoanAmount);
                 expect(loan.loanTenure).toBe(data.LoanTenure);
                 expect(loan.monthlyIncome).toBe(data.MonthlyIncome);
 
-                // Validate generated loan ID
                 expect(loan.loanId).toBeTruthy();
-
-                // Validate initial loan status
                 expect(loan.status).toBe('Created');
 
-                console.log(`${data.TC_ID} Loan ID: ${loan.loanId}`);
+                console.log('Generated Loan ID:', loan.loanId);
+
+                // 4. Fetch loan record from MySQL
+                const dbRecords = await getLoanById(loan.loanId);
+
+                // 5. Validate database record exists
+                expect(dbRecords.length).toBe(1);
+
+                const dbLoan = dbRecords[0];
+
+                // 6. Compare API response with database
+                expect(String(dbLoan.loan_id)).toBe(String(loan.loanId));
+
+                expect(dbLoan.customer_name).toBe(loan.customerName);
+
+                expect(Number(dbLoan.loan_amount))
+                    .toBe(Number(loan.loanAmount));
+
+                expect(dbLoan.status.toLowerCase())
+                    .toBe(loan.status.toLowerCase());
+
+                console.log('SQL Database Validation Successful');
+
+                console.log('Database Record:', dbLoan);
+
                 console.log(
-                    `${data.TC_ID}: Loan created and validated successfully`
+                    `${data.TC_ID}: API and SQL validation passed`
                 );
             }
 
-            // Log negative test case result
+            // 7. Negative test case
             if (data.ExpectedStatus === 400) {
+
                 console.log(
                     `${data.TC_ID}: Invalid loan data rejected successfully`
                 );
             }
         });
     }
+});
+
+// Close database connection after all tests
+test.afterAll(async () => {
+    await closeDB();
 });

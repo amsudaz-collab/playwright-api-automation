@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Playwright E2E Summary</title><style>
+body{font:15px/1.5 system-ui,sans-serif;max-width:1200px;margin:2rem auto;padding:0 1rem;color:#1f2937}
+h1,h2{color:#111827}.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem}
+.card{background:#f3f4f6;padding:1rem;border-radius:.5rem}.card strong{display:block;font-size:1.4rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;padding:.6rem;border-bottom:1px solid #d1d5db;vertical-align:top}
+.pass{color:#087443}.fail{color:#b42318}.skip{color:#6b7280}li{margin:.5rem 0}code{overflow-wrap:anywhere}
+</style></head><body>
+<h1>Playwright E2E Test Summary</h1><p><strong>Application:</strong> <a href="https://testautomationpractice.blogspot.com/">https://testautomationpractice.blogspot.com/</a><br>
+<strong>Executed:</strong> 2026-11-26T15:43:47.468Z · <strong>Browser:</strong> Chromium</p>
+<section class="summary">
+<div class="card">Total<strong>10</strong></div><div class="card">Passed<strong>5</strong></div>
+<div class="card">Failed<strong>4</strong></div><div class="card">Skipped<strong>1</strong></div>
+<div class="card">Duration<strong>74.75s</strong></div></section>
+<h2>Detailed Results</h2><table><thead><tr><th>Test</th><th>Description</th><th>Status</th><th>Time</th><th>Error</th><th>Screenshot</th></tr></thead><tbody><tr><td>testautomationpractice.spec.js › homepage loads with its expected title and primary heading</td><td>homepage loads with its expected title and primary heading</td><td class="pass">Pass</td><td>11.83s</td><td>—</td><td>—</td></tr>
+<tr><td>testautomationpractice.spec.js › primary practice navigation opens its linked page</td><td>primary practice navigation opens its linked page</td><td class="pass">Pass</td><td>7.71s</td><td>—</td><td>—</td></tr>
+<tr><td>testautomationpractice.spec.js › required name field rejects empty input and accepts a value</td><td>required name field rejects empty input and accepts a value</td><td class="pass">Pass</td><td>4.59s</td><td>—</td><td>—</td></tr>
+<tr><td>testautomationpractice.spec.js › email field rejects malformed email input</td><td>email field rejects malformed email input</td><td class="fail">Fail</td><td>11.01s</td><td>Error: expect(locator).toHaveAttribute(expected) failed
+
+Locator:  locator(&#39;#email&#39;)
+Expected: &quot;email&quot;
+Received: &quot;text&quot;
+Timeout:  5000ms
+
+Call log:
+  - Expect &quot;toHaveAttribute&quot; locator(&#39;#email&#39;) with timeout 5000ms
+  - waiting for locator(&#39;#email&#39;)
+    13 × locator resolved to &lt;input id=&quot;email&quot; type=&quot;text&quot; maxlength=&quot;25&quot; class=&quot;form-control&quot; placeholder=&quot;Enter EMail&quot;/&gt;
+       - unexpected value &quot;text&quot;
+</td><td>test-results/testautomationpractice-ema-8daea-jects-malformed-email-input/attachments/failure-screenshot-fbf94082e823ecc29992c453f7cca08dc877f263.png</td></tr>
+<tr><td>testautomationpractice.spec.js › Wikipedia search returns matching results</td><td>Wikipedia search returns matching results</td><td class="pass">Pass</td><td>8.25s</td><td>—</td><td>—</td></tr>
+<tr><td>testautomationpractice.spec.js › confirmation dialog handles cancellation and reports the outcome</td><td>confirmation dialog handles cancellation and reports the outcome</td><td class="pass">Pass</td><td>4.99s</td><td>—</td><td>—</td></tr>
+<tr><td>testautomationpractice.spec.js › layout fits a narrow mobile viewport without horizontal overflow</td><td>layout fits a narrow mobile viewport without horizontal overflow</td><td class="fail">Fail</td><td>4.42s</td><td>Error: expect(received).toBeLessThanOrEqual(expected)
+
+Expected: &lt;= 375
+Received:    970</td><td>test-results/testautomationpractice-lay-06fe5-without-horizontal-overflow/attachments/failure-screenshot-3025dab1b73641fd6f56b066b9008dce266356df.png</td></tr>
+<tr><td>testautomationpractice.spec.js › key form controls have programmatically associated labels</td><td>key form controls have programmatically associated labels</td><td class="fail">Fail</td><td>5.70s</td><td>Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 3
++ Received  + 3
+
+  Array [
+-   1,
+-   1,
+-   1,
++   0,
++   0,
++   0,
+  ]</td><td>test-results/testautomationpractice-key-ae7db-matically-associated-labels/attachments/failure-screenshot-c388e5ec56f8cad2250d0b52bccc89a00115aaae.png</td></tr>
+<tr><td>testautomationpractice.spec.js › page renders without browser console errors</td><td>page renders without browser console errors</td><td class="fail">Fail</td><td>11.64s</td><td>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 0
+Received: 4
+
+Call Log:
+- Timeout 5000ms exceeded while waiting on the predicate</td><td>test-results/testautomationpractice-pag-f32df-hout-browser-console-errors/attachments/failure-screenshot-754c2aa387bd4aa400fbfde9dd95db6a412517ab.png</td></tr>
+<tr><td>testautomationpractice.spec.js › authentication workflow is available</td><td>authentication workflow is available</td><td class="skip">Skipped</td><td>4.61s</td><td>—</td><td>—</td></tr></tbody></table>
+<h2>Defects Identified</h2><ul><li><strong>Medium — Email field does not enforce email format</strong><p>Steps: Open the home page, enter &quot;not-an-email&quot; in the Email field, and inspect its native validity.</p><p>Expected: Malformed email values are rejected by input validation.</p><p>Actual: Email is a text input and accepts a malformed value as valid.</p></li>
+<li><strong>High — Name, email, and phone inputs are not associated with their visible labels</strong><p>Steps: Inspect the Name, Email, and Phone fields with a screen reader or query their associated labels.</p><p>Expected: Each form field exposes its visible label as its accessible name.</p><p>Actual: The label `for` values do not match the corresponding input IDs.</p></li>
+<li><strong>Medium — Stylesheet resource is served with an unsupported MIME type</strong><p>Steps: Load the homepage and inspect browser console/network errors.</p><p>Expected: Stylesheets load with a CSS MIME type and no browser console errors.</p><p>Actual: The demos/style.css resource is refused because the response MIME type is text/html.</p></li>
+<li><strong>Medium — Page content overflows a 375px mobile viewport horizontally</strong><p>Steps: Open the homepage at 375×812 and compare document scroll width with viewport width.</p><p>Expected: The page fits the viewport without horizontal scrolling.</p><p>Actual: The document scroll width exceeds the viewport width.</p></li></ul>
+<h2>Console Errors</h2><ul><li>Refused to apply style from &#39;https://testautomationpractice.blogspot.com/resources/demos/style.css&#39; because its MIME type (&#39;text/html&#39;) is not a supported stylesheet MIME type, and strict MIME checking is enabled. <small>(observed 36 time(s))</small></li></ul>
+<h2>Console Warnings</h2><ul><li>None captured.</li></ul>
+<h2>Network Issues</h2><ul><li>GET https://testautomationpractice.blogspot.com/resources/demos/style.css — net::ERR_ABORTED <small>(observed 36 time(s))</small></li></ul>
+<h2>Accessibility Findings</h2><p>WCAG 2.2 A: form labels are not programmatically associated with their inputs (1.3.1 Info and Relationships; 4.1.2 Name, Role, Value). Automated checks are not a full WCAG conformance audit.</p>
+<h2>Recommendations</h2><ul><li>Use `type=&quot;email&quot;` and provide clear inline validation feedback for malformed email values.</li><li>Correct every label `for` attribute so it matches its input ID; verify accessible names with a screen reader.</li><li>Serve `resources/demos/style.css` with `text/css` and confirm the resource URL returns a stylesheet rather than HTML.</li><li>Recheck small-screen layout at 320px, 375px, and 414px widths after addressing any measured overflow.</li><li>No authentication form was found, so authentication testing was skipped rather than inferred.</li></ul>
+</body></html>

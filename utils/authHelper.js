@@ -26,6 +26,7 @@ async function requestWithAuth(request, apiCall) {
     return response;
 }
 
+
 module.exports = {
     requestWithAuth
 };
